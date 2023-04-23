@@ -67,14 +67,82 @@ After parsing the material file, you will be presented with a comprehensive list
 
 ```cpp
 # Example of a material file that will be used in the subsequent examples
+
 newmtl mat_1
 Ka 0.328013 0.328013 0.328013
 Kd 0.627451 0.627451 0.627451
 Ns 750.000000
+
 newmtl mat_2
 Ka 0.031400 0.031400 0.031400
 Kd 0.098039 0.098039 0.098039
 Ks 0.977692 0.968577 0.945277
+```
+Let's consider a scenario where our 3D graphics application is required to extract the values of Kd, Ka, and Ks for all materials from the material file. In the event that these values are not present in the file, we will implement our own default values, such as blue as the default color.
+In this system, there are three possible approaches to achieve this, as demonstrated below.
+
+## Example 1
+
+Classic way to check values
+
+```cpp
+#include "WavefrontMTL.h"
+#include <iostream>
+
+int main()
+{
+	mtl::Load file;
+
+	if( !file.load("C:\\example.mtl") )
+		return 1;
+
+	mtl::Color K;
+
+	K.color = mtl::rgb(0, 0, 1); //Blue
+
+	//Loop over all materials and check Ka, Kd and Ks
+
+	for( auto& material : file.materials() )
+	{
+		if( !material.Ka.hasValue() )
+			material.Ka = K; //Set default
+
+		if( !material.Kd.hasValue() )
+			material.Kd = K; //Set default
+
+		if( !material.Ks.hasValue() )
+			material.Ks = K; //Set default
+	}
+
+	//Trace out data
+	for (auto& material : file.materials())
+	{
+		std::string name = material.name;
+
+		std::cout << "newmtl " << name << std::endl;
+
+		std::cout << "Ka " << " " << material.Ka.color.r << " " << material.Ka.color.g << " " << material.Ka.color.b << std::endl;
+		std::cout << "Kd " << " " << material.Kd.color.r << " " << material.Kd.color.g << " " << material.Kd.color.b << std::endl;
+		std::cout << "Ks " << " " << material.Ks.color.r << " " << material.Ks.color.g << " " << material.Ks.color.b << std::endl;
+
+		std::cout << std::endl;
+	}
+
+	return 0;
+}
+```
+Bye running this code we get
+```
+newmtl mat_1
+Ka  0.328013 0.328013 0.328013
+Kd  0.627451 0.627451 0.627451
+Ks  0 0 1
+
+newmtl mat_2
+Ka  0.0314 0.0314 0.0314
+Kd  0.098039 0.098039 0.098039
+Ks  0.977692 0.968577 0.945277
+```
 
 ## License
 WavefrontMTL is licensed under MIT license.
