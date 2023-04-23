@@ -63,8 +63,18 @@ After parsing the material file, you will be presented with a comprehensive list
 | map_ORM       | Texture       | Texture ORM                  | DirectXMesh/Microsoft's DirectX engine |
 
 
+## example.mtl
 
-
+```cpp
+# Example of a material file that will be used in the subsequent examples
+newmtl mat_1
+Ka 0.328013 0.328013 0.328013
+Kd 0.627451 0.627451 0.627451
+Ns 750.000000
+newmtl mat_2
+Ka 0.031400 0.031400 0.031400
+Kd 0.098039 0.098039 0.098039
+Ks 0.977692 0.968577 0.945277
 
 ## License
 WavefrontMTL is licensed under MIT license.
