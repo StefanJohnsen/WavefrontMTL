@@ -22,7 +22,7 @@ Key Features:
 
 Certainly! Here's an example of how you can create a table in GitHub Markdown for the given `Material` struct:
 
-| Member        | Type          | Description                  |                                        |
+| Member        | Type          | Description                  | Extension                              |
 |---------------|---------------|------------------------------|----------------------------------------|
 | name          | string        | Material name                |                                        |
 | Kd            | Color         | Color                        |                                        |
@@ -49,6 +49,7 @@ Certainly! Here's an example of how you can create a table in GitHub Markdown fo
 | Ni            | double        | Optical density              |                                        |
 | Tr            | double        | Transparency                 |                                        |
 | refl          | Reflection    | Reflection map               |                                        |
+|---------------|---------------|------------------------------|----------------------------------------|
 | Ke            | Color         | Color Emissive               | Physically Rendering/Clara.io          |
 | Pr            | double        | Roughness factor             | Physically Rendering/Clara.io          |
 | Pm            | double        | Metalness factor             | Physically Rendering/Clara.io          |
@@ -59,6 +60,7 @@ Certainly! Here's an example of how you can create a table in GitHub Markdown fo
 | anisor        | double        | Anisotropy rotation          | Physically Rendering/Clara.io          |
 | map_Ke        | Texture       | Texture Emissive             | Physically Rendering/Clara.io          |
 | norm          | Texture       | Texture Normal               | Physically Rendering/Clara.io          |
+|---------------|---------------|------------------------------|----------------------------------------|
 | map_RMA       | Texture       | Texture RMA                  | DirectXMesh/Microsoft's DirectX engine |
 | map_ORM       | Texture       | Texture ORM                  | DirectXMesh/Microsoft's DirectX engine |
 
