@@ -18,3 +18,5 @@ Key Features:
 - Suitable for integration into 3D graphics applications, game engines,
   and other computer graphics projects
 
+## License
+WavefrontMTL is licensed under MIT license.
