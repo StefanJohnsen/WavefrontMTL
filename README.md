@@ -20,45 +20,49 @@ Key Features:
 
 #### Material Class
 
-| Type               | Variable                          | Description
-|--------------------------------------------------------------------------------------------------------------------------------|
-| string             | name                             | Material name														                               |
-| Color              | Kd                               | Color																                                   |
-| Color              | Ka                               | Color Ambient														                               |
-| Color              | Ks                               | Color Specular														                             |
-| Color              | Tf                               | Color Transmission													                           |
-| Value<double>      | Ns                               | Shininess  factor [0..1000]											                       |
-| Texture            | map_Kd                           | Texture Diffuse														                             |
-| Texture            | map_Ka                           | Texture Ambient														                             |
-| Texture            | map_Ks                           | Texture Specular														                           |
-| Texture            | map_Ns                           | Texture Glossiness			(Specular highlight component)			           |
-| Texture            | map_Pr                           | Texture Roughness													                             |
-| Texture            | map_Pm                           | Texture Metalness													                             |
-| Texture            | map_Ps                           | Texture Sheen														                               |
-| Texture            | map_d                            | Opacity Texture (alpha)												                         |
-| Texture            | map_bump                         | Normal texture														                             |
-| Texture            | map_Po                           | Texture Occlusion													                             |
-| Value<double>      | sharpness                        | Sharpness value [0..1000]											                         |
-| Opacity            | d                                | Dissolve factor														                             |
-| Texture            | disp                             | Displacement map														                           |
-| Texture            | decal                            | Stencil decal														                               |
-| Texture            | bump                             | Normal texture, some use bump instead of map_bump					             |
-| Value<int>         | illum                            | Illumination [0..10]													                         |
-| Value<double>      | Ni                               | Optical density														                             |
-| Value<double>      | Tr                               | Transparency															                             |
-| Reflection         | refl                             | Reflection map statements	(Sphere/Cube)							                   |
-| Color              | Ke                               | Color Emissive				  (Physically Rendering/Clara.io)			           |
-| Value<double>      | Pr                               | Roughness factor				(Physically Rendering/Clara.io)			           |
-| Value<double>      | Pm                               | Metalness factor				(Physically Rendering/Clara.io)			           |
-| Value<double>      | Ps                               | Sheen factor					  (Physically Rendering/Clara.io)			           |
-| Value<double>      | Pc                               | Thickness factor				(Physically Rendering/Clara.io)			           |
-| Value<double>      | Pcr                              | Roughness factor				(Physically Rendering/Clara.io)			           |
-| Value<double>      | aniso                            | Anisotropy					    (Physically Rendering/Clara.io)			           |
-| Value<double>      | anisor                           | Anisotropy rotation			(Physically Rendering/Clara.io)			           |
-| Texture            | map_Ke                           | Texture Emissive				(Physically Rendering/Clara.io)			           |
-| Texture            | norm                             | Texture Normal				  (Physically Rendering/Clara.io)			           |
-| Texture            | map_RMA                          | Texture RMA					    (DirectXMesh/Microsoft's DirectX engine)       |
-| Texture            | map_ORM                          | Texture ORM					    (DirectXMesh/Microsoft's DirectX engine)       |
+Certainly! Here's an example of how you can create a table in GitHub Markdown for the given `Material` struct:
+
+| Member        | Type          | Description                                       |
+|---------------|---------------|---------------------------------------------------|
+| name          | Value\<std::string\> | Material name                                |
+| Kd            | Color         | Color                                            |
+| Ka            | Color         | Color Ambient                                     |
+| Ks            | Color         | Color Specular                                    |
+| Tf            | Color         | Color Transmission                               |
+| Ns            | Value\<double\> | Shininess factor [0..1000]                       |
+| map_Kd        | Texture       | Texture Diffuse                                   |
+| map_Ka        | Texture       | Texture Ambient                                  |
+| map_Ks        | Texture       | Texture Specular                                 |
+| map_Ns        | Texture       | Texture Glossiness (Specular highlight component) |
+| map_Pr        | Texture       | Texture Roughness                                 |
+| map_Pm        | Texture       | Texture Metalness                                 |
+| map_Ps        | Texture       | Texture Sheen                                     |
+| map_d         | Texture       | Opacity Texture (alpha)                          |
+| map_bump      | Texture       | Normal texture                                    |
+| map_Po        | Texture       | Texture Occlusion                                 |
+| sharpness     | Value\<double\> | Sharpness value [0..1000]                       |
+| d             | Opacity       | Dissolve factor                                   |
+| disp          | Texture       | Displacement map                                 |
+| decal         | Texture       | Stencil decal                                    |
+| bump          | Texture       | Normal texture, some use bump instead of map_bump |
+| illum         | Value\<int\>    | Illumination [0..10]                            |
+| Ni            | Value\<double\> | Optical density                                 |
+| Tr            | Value\<double\> | Transparency                                    |
+| refl          | Reflection    | Reflection map statements (Sphere/Cube)           |
+| Ke            | Color         | Color Emissive (Physically Rendering/Clara.io)    |
+| Pr            | Value\<double\> | Roughness factor (Physically Rendering/Clara.io) |
+| Pm            | Value\<double\> | Metalness factor (Physically Rendering/Clara.io) |
+| Ps            | Value\<double\> | Sheen factor (Physically Rendering/Clara.io)     |
+| Pc            | Value\<double\> | Thickness factor (Physically Rendering/Clara.io) |
+| Pcr           | Value\<double\> | Roughness factor (Physically Rendering/Clara.io) |
+| aniso         | Value\<double\> | Anisotropy (Physically Rendering/Clara.io)       |
+| anisor        | Value\<double\> | Anisotropy rotation (Physically Rendering/Clara.io) |
+| map_Ke        | Texture       | Texture Emissive (Physically Rendering/Clara.io) |
+| norm          | Texture       | Texture Normal (Physically Rendering/Clara.io)   |
+| map_RMA       | Texture       | Texture RMA (DirectXMesh/Microsoft's DirectX engine) |
+| map_ORM       | Texture       | Texture ORM (DirectXMesh/Microsoft's DirectX engine) |
+
+You can copy and paste the above table into a GitHub Markdown file (e.g., README.md) in your repository to create a table that displays the members, types, and descriptions of the `Material` struct in a tabular format.
 
 
 ## License
