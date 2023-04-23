@@ -20,7 +20,7 @@ Key Features:
 
 #### Material Class
 
-Certainly! Here's an example of how you can create a table in GitHub Markdown for the given `Material` struct:
+After parsing the material file, you will be presented with a comprehensive list of all the materials that were discovered in the file. Each material is encapsulated within a struct and contains the following member variables.
 
 | Member        | Type          | Description                  | Extension                              |
 |---------------|---------------|------------------------------|----------------------------------------|
@@ -49,7 +49,6 @@ Certainly! Here's an example of how you can create a table in GitHub Markdown fo
 | Ni            | double        | Optical density              |                                        |
 | Tr            | double        | Transparency                 |                                        |
 | refl          | Reflection    | Reflection map               |                                        |
-|---------------|---------------|------------------------------|----------------------------------------|
 | Ke            | Color         | Color Emissive               | Physically Rendering/Clara.io          |
 | Pr            | double        | Roughness factor             | Physically Rendering/Clara.io          |
 | Pm            | double        | Metalness factor             | Physically Rendering/Clara.io          |
@@ -60,11 +59,11 @@ Certainly! Here's an example of how you can create a table in GitHub Markdown fo
 | anisor        | double        | Anisotropy rotation          | Physically Rendering/Clara.io          |
 | map_Ke        | Texture       | Texture Emissive             | Physically Rendering/Clara.io          |
 | norm          | Texture       | Texture Normal               | Physically Rendering/Clara.io          |
-|---------------|---------------|------------------------------|----------------------------------------|
 | map_RMA       | Texture       | Texture RMA                  | DirectXMesh/Microsoft's DirectX engine |
 | map_ORM       | Texture       | Texture ORM                  | DirectXMesh/Microsoft's DirectX engine |
 
-You can copy and paste the above table into a GitHub Markdown file (e.g., README.md) in your repository to create a table that displays the members, types, and descriptions of the `Material` struct in a tabular format.
+
+
 
 
 ## License
