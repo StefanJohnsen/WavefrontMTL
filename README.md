@@ -18,7 +18,7 @@ Key Features:
 - Suitable for integration into 3D graphics applications, game engines,
   and other computer graphics projects
 
-## Material Class
+#### Material Class
 
 | Type               | Variable                          | Description
 |--------------------------------------------------------------------------------------------------------------------------------|
