@@ -81,7 +81,7 @@ Ks 0.977692 0.968577 0.945277
 Let's consider a scenario where our 3D graphics application is required to extract the values of Kd, Ka, and Ks for all materials from the material file. In the event that these values are not present in the file, we will implement our own default values, such as blue as the default color.
 In this system, there are three possible approaches to achieve this, as demonstrated below.
 
-## Example 1
+## Method 1
 
 Classic way to check values. Load the file, iterate over all the materials, and retrieve the desired values. Utilize the hasValue() function to check if the value has been read, which returns true if the value exists. 
 
@@ -144,11 +144,14 @@ Kd  0.098039 0.098039 0.098039
 Ks  0.977692 0.968577 0.945277
 ```
 
-## Example 2
+## Method 2
 
-This approach is my preferred method, as it allows for pre-defined default values to be used if a value is not found.
+This approach is the preferred method, as it allows for pre-defined default values to be used if a value is not found.
 
 ```cpp
+#include "WavefrontMTL.h"
+#include <iostream>
+
 int main()
 {
 	mtl::Material defaultValues;
@@ -178,7 +181,8 @@ int main()
 	return 0;
 }
 ```
-Bye running this code we get the same result as Example 1.
+Bye running this code we get the same result as Method 1. The value for Ks is not defined for material_1 in the file, and as per the default settings, Ks has been assigned the value "blue".
+
 ```
 newmtl mat_1
 Ka  0.328013 0.328013 0.328013
@@ -191,8 +195,75 @@ Kd  0.098039 0.098039 0.098039
 Ks  0.977692 0.968577 0.945277
 ```
 
+## Method 3
 
+This approach utilizes a material file as a source for default values, which can be defined as desired. The material file follows the same rules and format as a standard MTL file. Let's create a basic file for demonstration. 
 
+```
+# My default values
+newmtl blue
+Ka 0 0 1
+Kd 0 0 1
+Ks 0 0 1 
+newmtl red
+Ka 1 0 0
+Kd 1 0 0
+Ks 1 0 0 
+```
+
+```cpp
+#include "WavefrontMTL.h"
+#include <iostream>
+
+int main()
+{
+	mtl::Load defaultFile;
+
+	if( !defaultFile.load("C:\\default.mtl") )
+		return 1;
+
+	mtl::Material defaultValues;
+
+	if( !defaultFile.lookup("blue", defaultValues) )
+		return 1;
+
+	mtl::Load file(defaultValues);
+
+	if( !file.load("C:\\example.mtl") )
+		return 1;
+
+	for( auto& material : file.materials() )
+	{
+		std::string name = material.name;
+
+		std::cout << "newmtl " << name << std::endl;
+
+		std::cout << "Ka " << " " << material.Ka.color.r << " " << material.Ka.color.g << " " << material.Ka.color.b << std::endl;
+		std::cout << "Kd " << " " << material.Kd.color.r << " " << material.Kd.color.g << " " << material.Kd.color.b << std::endl;
+		std::cout << "Ks " << " " << material.Ks.color.r << " " << material.Ks.color.g << " " << material.Ks.color.b << std::endl;
+
+		std::cout << std::endl;
+	}
+
+	return 0;
+}
+```
+
+Bye running this code we get the same result. 
+
+```
+newmtl mat_1
+Ka  0.328013 0.328013 0.328013
+Kd  0.627451 0.627451 0.627451
+Ks  0 0 1
+
+newmtl mat_2
+Ka  0.0314 0.0314 0.0314
+Kd  0.098039 0.098039 0.098039
+Ks  0.977692 0.968577 0.945277
+```
+
+One of the advantages of this approach is that there is no need for additional programming. If you wish to modify default values, you can simply update the default.mtl file.
 
 ## License
 WavefrontMTL is licensed under MIT license.
