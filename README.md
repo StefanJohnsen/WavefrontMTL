@@ -18,7 +18,7 @@ Key Features:
 - Suitable for integration into 3D graphics applications, game engines,
   and other computer graphics projects
 
-#### Material Class
+## Material Class
 
 After parsing the material file, you will be presented with a comprehensive list of all the materials that were discovered in the file. Each material is encapsulated within a struct and contains the following member variables.
 
