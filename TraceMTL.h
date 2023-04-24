@@ -1,44 +1,33 @@
 /*
-   TraceMTL.h
-      
-   C++ code solution for trace out all data in Wavefront MTL Parser class
-   
-   MIT License
+  TraceMTL.h
+     
+  C++ code solution for trace out all data in Wavefront MTL Parser class
+  
+  MIT License
 
-   Copyright (c) 2023 Stefan Falcon Johnsen
+  Copyright (c) 2023 Stefan Falcon Johnsen
 
-   Permission is hereby granted, free of charge, to any person obtaining a copy
-   of this software and associated documentation files (the "Software"), to deal
-   in the Software without restriction, including without limitation the rights
-   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-   copies of the Software, and to permit persons to whom the Software is
-   furnished to do so, subject to the following conditions:
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
 
-   The above copyright notice and this permission notice shall be included in
-   all copies or substantial portions of the Software.
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
 
-   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-   THE SOFTWARE.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
 
-   Author: Stefan Falk Johnsen                                (Falcon Coding)
-   Date: 22.04.2023
-
-   Usage Example:
-
-   // Specify your wavefront mtl file
-   std::std::string file;
-
-   // Create an instance of the Wavefront MTL Parser class
-   mtl::Load data;
-
-   //Trace out all data
-   if( data.load(file) )
-     mtl::trace(data);
+  Author: Stefan Falcon Johnsen
+  Email: stefan.johnsen@outlook.com
+  Date: 24.04.2023
  */
 
 #pragma once
@@ -52,7 +41,7 @@ namespace mtl
 	template <typename T>
 	void trace(const Value<T>& item, const bool end_line = true)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << item.value;
 
@@ -61,7 +50,7 @@ namespace mtl
 
 	inline void trace(const std::string& label, const Value<bool>& item, const bool end_line = true)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label << " ";
 
@@ -76,7 +65,7 @@ namespace mtl
 	template <typename T>
 	void trace(const std::string& label, const Value<T>& item, const bool end_line = true)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label << " " << item.value;
 
@@ -85,7 +74,7 @@ namespace mtl
 
 	inline void trace(const std::string& label, const xyz& item, const bool end_line = true)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label << " xyz " << item.x << " " << item.y << " " << item.z;
 
@@ -94,7 +83,7 @@ namespace mtl
 
 	inline void trace(const std::string& label, const rgb& item, const bool end_line = true)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label << " " << item.r << " " << item.g << " " << item.b;
 
@@ -103,7 +92,7 @@ namespace mtl
 
 	inline void trace(const std::string& label, const Model& item, const bool end_line = true)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label << " " << item.base << " " << item.gain;
 
@@ -112,7 +101,7 @@ namespace mtl
 
 	inline void trace(const std::string& label, const uvw& item, const bool end_line = true)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label << " " << item.u << " " << item.v << " " << item.w;
 
@@ -121,7 +110,7 @@ namespace mtl
 
 	inline void trace(const std::string& label, const Opacity& item)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label;
 
@@ -132,14 +121,14 @@ namespace mtl
 
 	inline void trace(const std::string& label, const Spectral& item)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label << " spectral " << item.file << " " << item.factor;
 	}
 
 	inline void trace(const std::string& label, const Color& item)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		trace(label, item.color);
 		trace(label, item.color_space);
@@ -148,7 +137,7 @@ namespace mtl
 
 	inline void trace(const std::string& label, const Texture& item)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label;
 
@@ -170,7 +159,7 @@ namespace mtl
 
 	inline void trace(const std::string& label, const Reflection& item)
 	{
-		if( !item.hasValue() ) return;
+		if( !item.isParsed() ) return;
 
 		std::cout << " " << label << " -type";
 
@@ -227,7 +216,7 @@ namespace mtl
 		trace("map_ORM", material.map_ORM);
 	}
 
-	inline void trace(const Load& load)
+	inline void trace(Load& load)
 	{
 		for( const auto& info : load.information() )
 			std::cout << " " << info << std::endl;
