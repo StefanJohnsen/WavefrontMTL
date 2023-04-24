@@ -1,99 +1,61 @@
 /*
-   WavefrontMTL.h
+  WavefrontMTL.h
+    
+  Wavefront MTL Parser - C++ Class for Parsing Material Information
   
-   Wavefront MTL Parser - C++ Class for Parsing Material Information
-   
-   A header-only C++ code solution for parsing Wavefront MTL files, with no
-   external dependencies other than the Standard Template Library (STL).
-   The code provides comprehensive support for reading and parsing all known
-   material parameters, including standard MTL parameters as well as additional
-   parameters used in Clara.io and DirectXMesh. Runs for C++ 17. If you need
-   to run this for C++ 11, move line 190 to a cpp in your project.
-
-   It allows for easy extraction of header information and materials,
-   enabling access to material properties such as ambient color, diffuse color,
-   specular color, transparency, shininess, metalness, roughness, etc.
-
-   The solution is self-contained in a single header file, making it easy to
-   integrate into existing projects without the need for additional libraries
-   or dependencies.
-   
-   Key Features:
+  A header-only C++ code solution for parsing Wavefront MTL files, with no
+  external dependencies other than the Standard Template Library (STL).
+  The code provides comprehensive support for reading and parsing all known
+  material parameters, including standard MTL parameters as well as additional
+  parameters used in Clara.io and DirectXMesh. Runs for C++ 17. If you need
+  to run this for C++ 11, move line 190 to a cpp in your project.
   
-   - Supports parsing of standard MTL parameters
-   - Supports parsing of Clara.io MTL parameters
-   - Supports parsing of DirectXMesh MTL parameters
-   - Retrieves header information and all materials in the MTL file
-   - Provides convenient access to material properties
-   - Robust and efficient parsing algorithm for handling large MTL files
-   - Suitable for integration into 3D graphics applications, game engines,
-     and other computer graphics projects
-
-   MIT License
+  It allows for easy extraction of header information and materials,
+  enabling access to material properties such as ambient color, diffuse color,
+  specular color, transparency, shininess, metalness, roughness, etc.
   
-   Copyright (c) 2023 Stefan Falcon Johnsen
+  The solution is self-contained in a single header file, making it easy to
+  integrate into existing projects without the need for additional libraries
+  or dependencies.
   
-   Permission is hereby granted, free of charge, to any person obtaining a copy
-   of this software and associated documentation files (the "Software"), to deal
-   in the Software without restriction, including without limitation the rights
-   to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-   copies of the Software, and to permit persons to whom the Software is
-   furnished to do so, subject to the following conditions:
+  Key Features:
   
-   The above copyright notice and this permission notice shall be included in
-   all copies or substantial portions of the Software.
+  - Supports parsing of standard MTL parameters
+  - Supports parsing of Clara.io MTL parameters
+  - Supports parsing of DirectXMesh MTL parameters
+  - Retrieves header information and all materials in the MTL file
+  - Provides convenient access to material properties
+  - Robust and efficient parsing algorithm for handling large MTL files
+  - Suitable for integration into 3D graphics applications, game engines,
+    and other computer graphics projects
   
-   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-   LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-   THE SOFTWARE.
+  MIT License
   
-   Author: Stefan Falk Johnsen                                (Falcon Coding)
-   Date: 22.04.2023
-   
-   Usage Example:
-
-   // Specify your wavefront mtl file
-   std::string file; 
-
-   // Create an instance of the Wavefront MTL Parser class
-   mtl::Load data;
-
-   if( data.load(file) )
-   {
-       // Retrieve all materials
-       const std::vector<mtl::Material> materials = data.materials();
-
-       // Access all material properties
-       for (const auto& material : materials)
-       {
-            std::string name = material.name; //Name of material group
-      
-    	    if(material.Ka.color.hasValue() ) //Check if group have Ka value
-      	    {
-      	       mtl::rgb color = material.Ka.color;
-      
-      	       // ... your code
-            }
-            
-            // ... and so on
-       }
-
-	   // ... or
-
-	   mtl::Material material;
-		
-	   if( data.lookup("material_A", material) )
-	   {
-			std::string name = material.name; //Name of material group
-
-			// ... and so on
-	   }
-   }
+  Copyright (c) 2023 Stefan Falcon Johnsen
+  
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+  
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+  
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  THE SOFTWARE.
+  
+  Author: Stefan Falcon Johnsen
+  Email: stefan.johnsen@outlook.com
+  Date: 24.04.2023
  */
+
 #pragma once
 
 #include <string>
@@ -122,15 +84,15 @@ namespace mtl
 		Load& operator=(const Load&&) = delete;
 
 		bool load(const std::string& path);
-		
-		const std::vector<Material>& materials() const
+
+		std::vector<Material>& materials()
 		{
 			return mtl;
 		}
 
 		bool lookup(const std::string& materialName, Material& material) const;
 
-		const std::vector<std::string>& information() const
+		std::vector<std::string>& information()
 		{
 			return info;
 		}
@@ -176,7 +138,7 @@ namespace mtl
 			return parse;
 		}
 
-		bool hasValue() const { return parse; }
+		bool isParsed() const { return parse; }
 
 	private:
 
@@ -216,6 +178,8 @@ namespace mtl
 	{
 		uvw() : Parse(), u(0), v(0), w(0) { }
 
+		uvw(const double& u, const double& v, const double& w) : Parse(), u(u), v(v), w(w) { }
+
 		double u; // Texture coordinate u mapping [0..1]
 		double v; // Texture coordinate v mapping [0..1]
 		double w; // Texture coordinate w mapping [0..1]
@@ -224,6 +188,8 @@ namespace mtl
 	struct rgb : Parse
 	{
 		rgb() : Parse(), r(0), g(0), b(0) { }
+
+		rgb(const double& r, const double& g, const double& b) : Parse(), r(r), g(g), b(b) { }
 
 		double r; // Ambient color red   [0..1]
 		double g; // Ambient color green [0..1]
@@ -234,6 +200,8 @@ namespace mtl
 	{
 		xyz() : Parse(), x(0), y(0), z(0) { }
 
+		xyz(const double& x, const double& y, const double& z) : Parse(), x(x), y(y), z(z) { }
+
 		double x; //  tristimulus x value in CIE
 		double y; //  tristimulus y value in CIE
 		double z; //  tristimulus z value in CIE
@@ -243,6 +211,8 @@ namespace mtl
 	{
 		Model() : Parse(), base(0), gain(1) { }
 
+		Model(const int base, const int gain) : Parse(), base(base), gain(gain) {}
+
 		int base; // Base color or albedo of a material [0..1]
 		int gain; // Gain factor for the texture map
 	};
@@ -251,6 +221,8 @@ namespace mtl
 	{
 		Opacity() : Parse(), d(1), halo(false) {}
 
+		Opacity(const double& d, const bool halo) : Parse(), d(d), halo(halo) {}
+
 		double d;    // Transparency [0..1]
 		bool   halo; // Halo effect (maximum intensity)
 	};
@@ -258,6 +230,8 @@ namespace mtl
 	struct Spectral : Parse
 	{
 		Spectral() : Parse(), factor(1) {}
+
+		Spectral(std::string& file, const double& factor) : Parse(), file(std::move(file)), factor(factor) {}
 
 		std::string file;   // Spectral file
 		double      factor; // Scaling factor
@@ -468,12 +442,12 @@ namespace mtl
 
 			if( *line == '#' )
 			{
-				if( !m.name.hasValue() )
+				if( !m.name.isParsed() )
 					info.emplace_back(trim(line + 1));
 			}
 			else if( char_cmp(line, "newmtl") )
 			{
-				if( m.name.hasValue() )
+				if( m.name.isParsed() )
 					mtl.emplace_back(material);
 
 				mtl.back().name = trim(line + 7);
@@ -552,7 +526,7 @@ namespace mtl
 				parse(line + 8, m.map_ORM);
 		}
 
-		return mtl.front().name.hasValue();
+		return mtl.front().name.isParsed();
 	}
 
 	//-------------------------------------------------------------------------------------------------------
@@ -774,7 +748,7 @@ namespace mtl
 
 		std::string temp;
 
-		bool hasValue(false);
+		bool isParsed(false);
 
 		while( *p != '\0' )
 		{
@@ -793,7 +767,7 @@ namespace mtl
 						texture.blendu = false;
 
 					if( temp == "on" || temp == "off" )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -809,7 +783,7 @@ namespace mtl
 						texture.blendv = false;
 
 					if( temp == "on" || temp == "off" )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -825,7 +799,7 @@ namespace mtl
 						texture.clamp = false;
 
 					if( temp == "on" || temp == "off" )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -835,7 +809,7 @@ namespace mtl
 				if( char_cmp(p, "boost ") )
 				{
 					if( parse(p + 6, texture.boost, end) )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -845,7 +819,7 @@ namespace mtl
 				if( char_cmp(p, "mm ") )
 				{
 					if( parse(p + 3, texture.mm, end) )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -855,7 +829,7 @@ namespace mtl
 				if( char_cmp(p, "o ") )
 				{
 					if( parse(p + 2, texture.o, end) )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -865,7 +839,7 @@ namespace mtl
 				if( char_cmp(p, "s ") )
 				{
 					if( parse(p + 2, texture.s, end) )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -875,7 +849,7 @@ namespace mtl
 				if( char_cmp(p, "t ") )
 				{
 					if( parse(p + 2, texture.t, end) )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -885,7 +859,7 @@ namespace mtl
 				if( char_cmp(p, "bm ") )
 				{
 					if( parse(p + 3, texture.bm, end) )
-						hasValue = true;
+						isParsed = true;
 
 					p = end;
 
@@ -900,7 +874,7 @@ namespace mtl
 						{
 							texture.imfchan = *temp.c_str();
 
-							hasValue = true;
+							isParsed = true;
 						}
 
 						p = end;
@@ -917,13 +891,13 @@ namespace mtl
 
 		if( p && *p && *p != '\0' )
 		{
-			hasValue = true;
+			isParsed = true;
 
 			texture.file = p;
 			texture.file.parsed();
 		}
 
-		return texture.parsed(hasValue);
+		return texture.parsed(isParsed);
 	}
 
 	inline bool parse(char* line, Texture& texture)
