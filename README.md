@@ -345,7 +345,7 @@ Upon running this process, we obtain...
  Ni 1.19713
  refl -type sphere -mm 0 1 clouds.mpc
 ```
-## Source
+## References
 The following sources have been utilized in the development of this Wavefront MTL parser.
 
 [Paul Bourke: MTL material format (Lightwave, OBJ)](http://paulbourke.net/dataformats/mtl/)
@@ -353,9 +353,6 @@ The following sources have been utilized in the development of this Wavefront MT
 [Wikipedia: Wavefront .obj file](https://en.wikipedia.org/wiki/Wavefront_.obj_file)
 
 [FileFormat.info: WaveFront Material (.mtl) File Format](https://www.fileformat.info/format/material/)
-
-
-
 
 ## License
 WavefrontMTL is licensed under MIT license.
