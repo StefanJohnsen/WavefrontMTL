@@ -91,7 +91,7 @@ In this system, there are three possible approaches to achieve this, as demonstr
 
 ## Method 1
 
-Classic way to check values. Load the file, iterate over all the materials, and retrieve the desired values. Utilize the hasValue() function to check if the value has been read, which returns true if the value exists. 
+A classic approach to check values is to load the file, iterate over all the materials, and retrieve the desired values. The "isParsed()" function can be used to check if the value has been read, and it returns true if the value is parsed.
 
 ```cpp
 #include "WavefrontMTL.h"
@@ -112,13 +112,13 @@ int main()
 
 	for( auto& material : file.materials() )
 	{
-		if( !material.Ka.hasValue() )
+		if( !material.Ka.isParsed() )
 			material.Ka = K; //Set default
 
-		if( !material.Kd.hasValue() )
+		if( !material.Kd.isParsed() )
 			material.Kd = K; //Set default
 
-		if( !material.Ks.hasValue() )
+		if( !material.Ks.isParsed() )
 			material.Ks = K; //Set default
 	}
 
@@ -274,7 +274,7 @@ Ks  0.977692 0.968577 0.945277
 One of the advantages of this approach is that there is no need for additional programming. If you wish to modify default values, you can simply update the default.mtl file.
 
 ## Test Wavefront MTL
-We have included a trace routine, called TraceMTL, which simplifies the process of verifying the data that Wavefront MTL reads from any given MTL file. Let's examine a complex example and utilize TraceMTL to illustrate the data that has been successfully parsed from it.
+We have included a trace routine, called TraceMTL, which simplifies the process of verifying the data that WavefrontMTL reads from any given MTL file. Let's examine a complex example and utilize TraceMTL to illustrate the data that has been successfully parsed from it.
 
 Below we see a material file that contains advanced use of MTL with only one material.
 
@@ -301,7 +301,7 @@ bump -s 1 1 1 -o 0 0 0 -bm 1 sand.mpb
 refl -type sphere -mm 0 1 clouds.mpc
 ```
 
-Let's parse this file and utilize the trace functionality to showcase the data that has been collected by Wavefront MTL.
+Let's parse this file and utilize the trace functionality to showcase the data that has been collected by WavefrontMTL.
 
 ```cpp
 #include "WavefrontMTL.h"
