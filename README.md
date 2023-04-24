@@ -265,6 +265,18 @@ Ks  0.977692 0.968577 0.945277
 
 One of the advantages of this approach is that there is no need for additional programming. If you wish to modify default values, you can simply update the default.mtl file.
 
+## Source
+The following sources have been utilized in the development of this Wavefront MTL parser.
+
+[Paul Bourke: MTL material format (Lightwave, OBJ)](http://paulbourke.net/dataformats/mtl/)
+
+[Wikipedia: Wavefront .obj file](https://en.wikipedia.org/wiki/Wavefront_.obj_file)
+
+[FileFormat.info: WaveFront Material (.mtl) File Format](https://www.fileformat.info/format/material/)
+
+
+
+
 ## License
 WavefrontMTL is licensed under MIT license.
 
