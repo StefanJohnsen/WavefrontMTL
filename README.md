@@ -273,6 +273,78 @@ Ks  0.977692 0.968577 0.945277
 
 One of the advantages of this approach is that there is no need for additional programming. If you wish to modify default values, you can simply update the default.mtl file.
 
+## Test Wavefront MTL
+We have included a trace routine, called TraceMTL, which simplifies the process of verifying the data that Wavefront MTL reads from any given MTL file. Let's examine a complex example and utilize TraceMTL to illustrate the data that has been successfully parsed from it.
+
+Below we see a material file that contains advanced use of MTL with only one material.
+
+```
+# Example of advance use of MTL
+newmtl advance
+Ka 0.0435 0.0435 0.0435
+Kd 0.1086 0.1086 0.1086
+Ks 0.0000 0.0000 0.0000
+Tf 0.9885 0.9885 0.9885
+illum 6
+d -halo 0.6600
+Ns 10.0000
+sharpness 60
+Ni 1.19713
+map_Ka -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
+map_Kd -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
+map_Ks -s 1 1 1 -o 0 0 0 -mm 0 1 chrome.mpc
+map_Ns -s 1 1 1 -o 0 0 0 -mm 0 1 wisp.mps
+map_d -s 1 1 1 -o 0 0 0 -mm 0 1 wisp.mps
+disp -s 1 1 .5 wisp.mps
+decal -s 1 1 1 -o 0 0 0 -mm 0 1 sand.mps
+bump -s 1 1 1 -o 0 0 0 -bm 1 sand.mpb
+refl -type sphere -mm 0 1 clouds.mpc
+```
+
+Let's parse this file and utilize the trace functionality to showcase the data that has been collected by Wavefront MTL.
+
+```cpp
+#include "WavefrontMTL.h"
+#include "TraceMTL.h"
+
+int main()
+{
+	mtl::Load file;
+
+	if( !file.load("C:\\advance.mtl") )
+		return 1;
+
+	mtl::trace(file);
+
+	return 0;
+}
+```
+
+Upon running this process, we obtain...
+
+```
+ Example of advance use of MTL
+
+ newmtl advance
+ Ka 0.0435 0.0435 0.0435
+ Kd 0.1086 0.1086 0.1086
+ Ks 0 0 0
+ map_Kd -mm 0 1 -o 0 0 0 -s 1 1 1 chrome.mpc
+ map_Ka -mm 0 1 -o 0 0 0 -s 1 1 1 chrome.mpc
+ map_Ks -mm 0 1 -o 0 0 0 -s 1 1 1 chrome.mpc
+ map_Ns -mm 0 1 -o 0 0 0 -s 1 1 1 wisp.mps
+ map_d -mm 0 1 -o 0 0 0 -s 1 1 1 wisp.mps
+ Ns 10
+ Tf 0.9885 0.9885 0.9885
+ sharpness 60
+ d -halo 0.66
+ disp -s 1 1 0.5 wisp.mps
+ decal -mm 0 1 -o 0 0 0 -s 1 1 1 sand.mps
+ bump -bm 1 -o 0 0 0 -s 1 1 1 sand.mpb
+ illum 6
+ Ni 1.19713
+ refl -type sphere -mm 0 1 clouds.mpc
+```
 ## Source
 The following sources have been utilized in the development of this Wavefront MTL parser.
 
