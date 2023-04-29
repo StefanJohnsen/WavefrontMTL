@@ -113,13 +113,13 @@ int main()
 	for( auto& material : file.materials() )
 	{
 		if( !material.Ka.isParsed() )
-			material.Ka = K; //Set default
+			material.Ka = K;
 
 		if( !material.Kd.isParsed() )
-			material.Kd = K; //Set default
+			material.Kd = K;
 
 		if( !material.Ks.isParsed() )
-			material.Ks = K; //Set default
+			material.Ks = K;
 	}
 
 	//Trace out data
