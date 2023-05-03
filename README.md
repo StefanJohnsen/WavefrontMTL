@@ -23,7 +23,7 @@ Key Features:
 Copy `Wavefront.h` to your project and include the file in your cpp (see consol examples below)
 
 ```
-#include "Wavefront.h"
+#include "WavefrontMTL.h"
 ```
 
 ## Material Class
