@@ -24,6 +24,10 @@ This project is designed to be compatible with C++11 and utilizes solely standar
 
 *If you require the use of **C++98**, see [Wavefront98](https://github.com/StefanJohnsen/Wavefront98) repository.
 
+### Need a Wavefront Object File (OBJ) parser?
+*When working with Wavefront Material Template Library (MTL) files, you need a reliable Wavefront OBJ parser to handle the corresponding geometry data.
+WavefrontMTL is designed to complement and work seamlessly with the [WavefrontOBJ](https://github.com/StefanJohnsen/WavefrontOBJ) repository.*
+
 ### OS Support
 - Windows
 - Linux
