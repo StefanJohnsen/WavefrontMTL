@@ -22,6 +22,8 @@ A header-only C++ wavefront material parser is a self-contained software compone
 
 This project is designed to be compatible with C++11 and utilizes solely standard C++ Standard Template Library (STL) components. It has been thoughtfully engineered to function independently without the need for any supplementary external libraries or dependencies. This streamlined design ensures the project remains self-contained, promoting simplicity and ease of integration into your development environment.<br>
 
+*If you require the use of **C++98**, see [Wavefront98](https://github.com/StefanJohnsen/Wavefront98) repository.
+
 ### OS Support
 - Windows
 - Linux
